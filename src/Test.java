@@ -5,6 +5,8 @@ import java.io.IOException;
 public class Test {
     public static void main(String[] args) throws IOException {
         VerificationCode vc = new VerificationCode(200, 600);
-        vc.ImagePrint(new FileOutputStream("F://aaa.jpg"));
+        String s= vc.getVerificationCodeString();
+        vc.ImagePrint(new FileOutputStream("F://ouyang.jpg"));
+        System.out.println(s);
     }
 }

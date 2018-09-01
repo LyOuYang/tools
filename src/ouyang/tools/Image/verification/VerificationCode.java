@@ -9,11 +9,18 @@ import java.util.Random;
 public class VerificationCode {
     private int imageHeight;
     private int imageWidth;
+    private String verificationCodeString;
 
     public VerificationCode(int imageHeight, int imageWidth) {
         this.imageHeight = imageHeight;
         this.imageWidth = imageWidth;
+        this.verificationCodeString = getVerificationCode();
     }
+
+    public String getVerificationCodeString() {
+        return verificationCodeString;
+    }
+
 
     /**
      * 1.可出现的字符0-9，a-z,随机大小写
@@ -23,7 +30,7 @@ public class VerificationCode {
      * 4.位置变化
      * 5.干扰线
      */
-    public static String getVerificationCode() {
+    private static String getVerificationCode() {
         String vs = "";
         String showChar = "23456789abcdefghijknmpqrstuvwxyz";//10-2+26-2
         Random rdChar = new Random();
@@ -44,11 +51,11 @@ public class VerificationCode {
         BufferedImage bf = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bf.createGraphics();
         graphics.setColor(Color.WHITE);
+        char[] vs = verificationCodeString.toCharArray();
         graphics.fillRect(0, 0, imageWidth, imageHeight);
         for (int i = 0; i < 4; i++) {
             graphics.setColor(new Color(rd.nextInt(220), rd.nextInt(220), rd.nextInt(220), rd.nextInt(100) + 60));
             graphics.setFont(new Font(Typefaces[rd.nextInt(5)], rd.nextInt(3), imageWidth / 6 + rd.nextInt(imageHeight / 2)));
-            char[] vs = getVerificationCode().toCharArray();
             graphics.drawChars(vs, i, 1, i * imageWidth / 4 + rd.nextInt(imageHeight / 2), imageHeight);
         }
         for (int i = 0; i < imageWidth * 4; i++) {
