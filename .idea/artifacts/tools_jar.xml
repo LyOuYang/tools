@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="tools:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/tools_jar</output-path>
+    <root id="archive" name="tools.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="tools" />
+      <element id="library" level="module" name="JUnit4" module-name="tools" />
+    </root>
+  </artifact>
+</component>

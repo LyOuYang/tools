@@ -1,4 +1,5 @@
 package ouyang.tools.Image.verification;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,8 +7,8 @@ import java.io.*;
 import java.util.Random;
 
 public class VerificationCode {
-    private  int imageHeight;
-    private  int imageWidth;
+    private int imageHeight;
+    private int imageWidth;
 
     public VerificationCode(int imageHeight, int imageWidth) {
         this.imageHeight = imageHeight;
@@ -45,20 +46,19 @@ public class VerificationCode {
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, imageWidth, imageHeight);
         for (int i = 0; i < 4; i++) {
-            graphics.setColor(new Color(rd.nextInt(220), rd.nextInt(220), rd.nextInt(220), rd.nextInt(100) + 50));
+            graphics.setColor(new Color(rd.nextInt(220), rd.nextInt(220), rd.nextInt(220), rd.nextInt(100) + 60));
             graphics.setFont(new Font(Typefaces[rd.nextInt(5)], rd.nextInt(3), imageWidth / 6 + rd.nextInt(imageHeight / 2)));
             char[] vs = getVerificationCode().toCharArray();
             graphics.drawChars(vs, i, 1, i * imageWidth / 4 + rd.nextInt(imageHeight / 2), imageHeight);
         }
         for (int i = 0; i < imageWidth * 4; i++) {
             graphics.setColor(new Color(rd.nextInt(220), rd.nextInt(220), rd.nextInt(220)));
-            graphics.fillOval(rd.nextInt(imageWidth), rd.nextInt(imageHeight), rd.nextInt(20), rd.nextInt(5));//画椭圆
-            if (i % 100 == 0)
-                graphics.drawLine(rd.nextInt(imageWidth), rd.nextInt(imageHeight), rd.nextInt(imageWidth), rd.nextInt(imageHeight));
-        }
-        for (int i = 0; i < 10; i++) {
-            graphics.setColor(new Color(rd.nextInt(220), rd.nextInt(220), rd.nextInt(220)));
+            graphics.fillOval(rd.nextInt(imageWidth), rd.nextInt(imageHeight), rd.nextInt(imageHeight / 10), rd.nextInt(5));//画椭圆
 
+        }
+        for (int i = 0; i < 4; i++) {
+            graphics.setColor(new Color(rd.nextInt(220), rd.nextInt(220), rd.nextInt(220)));
+            graphics.drawLine(rd.nextInt(imageWidth), rd.nextInt(imageHeight), rd.nextInt(imageWidth), rd.nextInt(imageHeight));
         }
 
         return bf;
@@ -67,5 +67,4 @@ public class VerificationCode {
     public void ImagePrint(OutputStream out) throws IOException {
         ImageIO.write(getBufferedImage(), "JPEG", out);
     }
-
 }
